@@ -1,0 +1,382 @@
+{
+  "project": "Strawberry LED Domain Shift \u2014 WMG9B7-15",
+  "timestamp": "2026-04-26T14:54:18.608885",
+  "python_version": "3.12.3",
+  "platform": "Linux-6.8.0-1007-gcp-x86_64-with-glibc2.39",
+  "gpu_name": "NVIDIA L4",
+  "gpu_vram_gb": 23.66,
+  "cuda_version": "13.0",
+  "device": "cuda",
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "torchvision": "0.26.0",
+    "albumentations": "1.4.24",
+    "grad-cam": "1.5.5",
+    "scikit-learn": "1.8.0",
+    "scikit-image": "0.26.0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.9",
+    "seaborn": "0.13.2",
+    "Pillow": "12.2.0",
+    "tqdm": "4.67.3",
+    "joblib": "1.5.3",
+    "cv2": "4.13.0"
+  },
+  "config": {
+    "patch_size": 224,
+    "min_patch_px": 20,
+    "patch_padding": 0.1,
+    "n_test_images": 150,
+    "train_val_ratio": 0.8,
+    "class_map": {
+      "0": "ripe",
+      "1": "unripe"
+    },
+    "use_drive_cache": false
+  },
+  "reproducibility": {
+    "global_seed": 42,
+    "experiment_seeds": [
+      42,
+      123,
+      456
+    ],
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "guarantee": "Best-effort: identical on same hardware/CUDA version. Minor variation expected across GPU architectures."
+  },
+  "hardware": {
+    "device": "cuda",
+    "cpu_cores_logical": 8,
+    "cpu_cores_physical": 4,
+    "sys_ram_gb": 33.7,
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L4",
+    "gpu_architecture": "Ada Lovelace (L4)",
+    "compute_capability": "8.9",
+    "multi_processor_count": 58,
+    "warp_size": 32,
+    "total_vram_gb": 23.66,
+    "free_vram_gb": 23.19,
+    "cuda_version": "13.0",
+    "cudnn_version": 91900,
+    "warmup_time_s": 0.126,
+    "vram_sufficient": true,
+    "recommended_batch_size": 64,
+    "supports_fp16_tensor_cores": true,
+    "supports_bf16_tf32": true
+  },
+  "dataset_download": {
+    "zenodo_url": "https://zenodo.org/record/6126677/files/strawberries.zip",
+    "md5_verified": "db8d5dcb4b8adebf1621788373fd3031",
+    "archive_size_gb": 1.486,
+    "total_files": 1628
+  },
+  "file_audit": {
+    "img_dir": "strawberry_project/data/raw/strawberries/images",
+    "lbl_dir": "strawberry_project/data/raw/strawberries/labels",
+    "total_images": 813,
+    "total_labels": 814,
+    "paired_count": 813,
+    "img_only_count": 0,
+    "lbl_only_count": 1,
+    "empty_label_count": 11,
+    "invalid_annot_count": 3,
+    "annotations_by_class": {
+      "0": 1962,
+      "2": 1857,
+      "1": 746
+    },
+    "total_annotations": 4565,
+    "inscope_annotations": 2708,
+    "inscope_images": 802
+  },
+  "class_distribution": {
+    "n_ripe": 1960,
+    "n_unripe": 731,
+    "imbalance_ratio": 2.681,
+    "class_weights": {
+      "ripe": 0.6865,
+      "unripe": 1.8406
+    }
+  },
+  "split": {
+    "strategy": "image-level stratified (no patch-level leakage)",
+    "global_seed": 42,
+    "n_test_images": 150,
+    "train_val_ratio": 0.8,
+    "split_csv": "strawberry_project/data/splits/split_assignments.csv",
+    "counts": {
+      "test_day_ripe": 362,
+      "test_day_unripe": 153,
+      "train_ripe": 1266,
+      "train_unripe": 493,
+      "val_ripe": 332,
+      "val_unripe": 85
+    }
+  },
+  "eda_colour": {
+    "ripe": {
+      "R": {
+        "mean": 137.23,
+        "std": 35.57
+      },
+      "G": {
+        "mean": 95.12,
+        "std": 31.24
+      },
+      "B": {
+        "mean": 148.06,
+        "std": 10.3
+      },
+      "L": {
+        "mean": 115.14,
+        "std": 30.32
+      },
+      "a": {
+        "mean": 141.8,
+        "std": 10.97
+      },
+      "b_star": {
+        "mean": 148.06,
+        "std": 10.3
+      }
+    },
+    "unripe": {
+      "R": {
+        "mean": 139.25,
+        "std": 32.36
+      },
+      "G": {
+        "mean": 128.94,
+        "std": 31.39
+      },
+      "B": {
+        "mean": 150.0,
+        "std": 10.08
+      },
+      "L": {
+        "mean": 135.81,
+        "std": 30.73
+      },
+      "a": {
+        "mean": 126.64,
+        "std": 8.07
+      },
+      "b_star": {
+        "mean": 150.0,
+        "std": 10.08
+      }
+    }
+  },
+  "svm_features": {
+    "feature_dim": 259,
+    "components": {
+      "hsv_histogram": {
+        "bins": 32,
+        "channels": 3,
+        "dim": 96
+      },
+      "lbp": {
+        "radius": 2,
+        "n_points": 16,
+        "method": "uniform",
+        "dim": 18
+      },
+      "hog": {
+        "cells": "3x3",
+        "orientations": 9,
+        "pixels_per_cell": "~74x74",
+        "dim": 81
+      },
+      "lab_ab_hist": {
+        "bins": 32,
+        "channels": "a*+b* only (L* excluded)",
+        "dim": 64
+      }
+    },
+    "leakage_verified": true,
+    "extraction_time_s": 0.0,
+    "split_sizes": {
+      "train": 1759,
+      "val": 417,
+      "test_day": 515,
+      "test_night": 515
+    }
+  },
+  "dl_architecture": {
+    "model": "convnext_tiny",
+    "paper": "Liu et al., A ConvNet for the 2020s, CVPR 2022",
+    "pretrained": "ImageNet-1K (IMAGENET1K_V1)",
+    "num_classes": 2,
+    "class_map": {
+      "0": "ripe",
+      "1": "unripe"
+    },
+    "total_params": 27821666,
+    "trainable_params": 27578882,
+    "frozen_params": 242784,
+    "frozen_layers": [
+      "features[0] stem",
+      "features[1] stage1"
+    ],
+    "trainable_layers": [
+      "features[2]-[7]",
+      "classifier"
+    ],
+    "gradcam_target": "features[-1] (Stage 4, 7x7, 768ch)",
+    "classifier_head": "Linear(768, 2)",
+    "vram_estimate_bs64": "~2.8 GB"
+  },
+  "dl_training_config": {
+    "optimizer": "AdamW",
+    "lr": 0.0003,
+    "lr_min": 2.9999999999999997e-06,
+    "lr_warmup_init": 2.9999999999999997e-06,
+    "llrd_decay": 0.85,
+    "weight_decay": 0.05,
+    "selective_wd": true,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "warmup_epochs": 3,
+    "max_epochs": 40,
+    "cosine_epochs": 37,
+    "early_stop_patience": 10,
+    "early_stop_monitor": "val_macro_f1",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "loss_fn": "CrossEntropyLoss",
+    "class_weights": {
+      "ripe": 0.6947,
+      "unripe": 1.784
+    },
+    "scheduler": "SequentialLR(LinearLR+CosineAnnealingLR)",
+    "mixed_precision": true,
+    "seeds": [
+      42,
+      123,
+      456
+    ]
+  },
+  "dl_augmentation": {
+    "train_transforms": [
+      "RandomHorizontalFlip(p=0.5)",
+      "RandomVerticalFlip(p=0.5)",
+      "RandomRotation(30, fill=0)",
+      "Pad(16, reflect) + RandomCrop(224)",
+      "ColorJitter(b=0.2, c=0.2, s=0.15, hue=0.05)",
+      "ToTensor",
+      "Normalize(ImageNet)"
+    ],
+    "val_transforms": [
+      "Resize(224)",
+      "ToTensor",
+      "Normalize(ImageNet)"
+    ],
+    "imagenet_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "imagenet_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "num_workers": 2,
+    "pin_memory": true,
+    "drop_last": true,
+    "persistent_workers": true,
+    "train_ch_means_rgb": [
+      0.5274999737739563,
+      0.3562000095844269,
+      0.2759000062942505
+    ],
+    "dataset_sizes": {
+      "train": 1759,
+      "val": 417,
+      "test_day": 515,
+      "test_night": 515
+    },
+    "steps_per_epoch": 27
+  },
+  "E1_training": {
+    "mean_val_macro_f1": 0.9569467831380871,
+    "std_val_macro_f1": 0.0019406093902136156,
+    "seeds": [
+      42,
+      123,
+      456
+    ],
+    "checkpoints": {
+      "42": "strawberry_project/models/E1_seed42_best.pt",
+      "123": "strawberry_project/models/E1_seed123_best.pt",
+      "456": "strawberry_project/models/E1_seed456_best.pt"
+    }
+  },
+  "E1_test_day": {
+    "macro_f1": 0.956859,
+    "macro_f1_ci_95": [
+      0.944159,
+      0.968752
+    ],
+    "auc_roc": 0.98114,
+    "mcc": 0.91414,
+    "mean_macro_f1": 0.956845,
+    "std_macro_f1": 0.003079
+  },
+  "E3_test_night": {
+    "macro_f1": 0.949176,
+    "auc_roc": 0.974431,
+    "mcc": 0.898464,
+    "day_night_delta": {
+      "delta_macro_f1": 0.007683,
+      "delta_accuracy": 0.007119,
+      "delta_auc_roc": 0.006709,
+      "delta_mcc": 0.015676,
+      "delta_ripe_f1": 0.005424,
+      "delta_unripe_f1": 0.009942,
+      "pct_f1_degradation": 0.8
+    }
+  },
+  "E4_degradation": {
+    "delta_macro_f1": 0.007683,
+    "pct_f1_degradation": 0.8,
+    "all_seeds_degrade": false
+  },
+  "E5_adaptation": {
+    "e5_night_macro_f1": 0.951456,
+    "e5_day_macro_f1": 0.95408,
+    "recovery_ratio": 0.2968,
+    "day_retention": 0.9971
+  },
+  "Grad_CAM": {
+    "target_layer": "features[7][-1]",
+    "method": "GradCAM",
+    "reshape_transform": "convnext_NHWC_to_NCHW",
+    "n_patches": 6,
+    "selection": "E1-correct-day + E1-confused-night (strategic)",
+    "figure": "strawberry_project/results/figures/gradcam_comparison_grid.png"
+  },
+  "Phase10": {
+    "master_csv": "strawberry_project/results/metrics/master_results_table.csv",
+    "summary_figure": "summary_4panel.png"
+  },
+  "reproducibility_audit": {
+    "all_pass": true,
+    "audit_items": {
+      "GLOBAL_SEED defined (int)": "PASS  (42)",
+      "EXPERIMENT_SEEDS (3 values)": "PASS  ([42, 123, 456])",
+      "6 metrics JSONs exist": "PASS  (all found)",
+      "6 checkpoints exist (3xE1, 3xE5)": "PASS  (all found)",
+      "12 figures exist": "PASS  (all found)",
+      "metadata.json has required keys": "PASS  (all found)",
+      "master_results_table.csv exists": "PASS",
+      "E5_recovery.json exists": "PASS"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "recovery_ratio": 0.2968,
+  "day_retention": 0.9971,
+  "e1_day_f1": 0.956859,
+  "e3_night_f1": 0.949176,
+  "e5_night_f1": 0.951456,
+  "e5_day_f1": 0.95408,
+  "gap_e1_e3": 0.007683,
+  "recovered_f1": 0.00228
+}

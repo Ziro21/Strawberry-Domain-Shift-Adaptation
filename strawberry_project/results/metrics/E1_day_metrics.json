@@ -1,0 +1,51 @@
+{
+  "experiment": "E1-Day",
+  "model": "convnext_tiny",
+  "split": "test_day",
+  "n_samples": 515,
+  "macro_f1": 0.956859,
+  "macro_f1_ci_95": [
+    0.944159,
+    0.968752
+  ],
+  "auc_pr": 0.958596,
+  "auc_roc": 0.98114,
+  "mcc": 0.91414,
+  "accuracy": 0.964401,
+  "mean_macro_f1": 0.956845,
+  "std_macro_f1": 0.003079,
+  "training_seeds": [
+    42,
+    123,
+    456
+  ],
+  "per_seed_f1": {
+    "42": 0.958157,
+    "123": 0.959784,
+    "456": 0.952592
+  },
+  "per_class": {
+    "ripe": {
+      "precision": 0.966516,
+      "recall": 0.983425,
+      "f1": 0.974897,
+      "support": 1086
+    },
+    "unripe": {
+      "precision": 0.959091,
+      "recall": 0.91939,
+      "f1": 0.938821,
+      "support": 459
+    }
+  },
+  "confusion_matrix": [
+    [
+      1068,
+      18
+    ],
+    [
+      37,
+      422
+    ]
+  ]
+}

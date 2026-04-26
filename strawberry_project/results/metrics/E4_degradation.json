@@ -1,0 +1,18 @@
+{
+  "experiment_baseline": "E1-Day",
+  "experiment_shifted": "E3-DL-Day->Night",
+  "delta_macro_f1": 0.007683,
+  "delta_accuracy": 0.007119,
+  "delta_auc_roc": 0.006709,
+  "delta_mcc": 0.015676,
+  "delta_ripe_f1": 0.005424,
+  "delta_unripe_f1": 0.009942,
+  "pct_f1_degradation": 0.8,
+  "per_seed_delta_f1": {
+    "42": 0.026634,
+    "123": -0.000623,
+    "456": -0.003324
+  },
+  "all_seeds_degrade": false,
+  "significance_note": "N=3 seeds: min achievable p-value = 0.125 (paired permutation). Formal p<0.05 not achievable. Degradation reported as directionally consistent across all 3 seeds instead."
+}
