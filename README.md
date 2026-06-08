@@ -45,11 +45,29 @@ Reproducibility: fixed seeds across Python/NumPy/PyTorch(+CUDA),
 
 ## Results
 
-Reported per experiment as macro-averaged and per-class **F1 / precision / recall**,
-with **ΔF1 (night vs day)** as the headline domain-shift metric, training curves
-across multiple seeds (mean ± std), and Grad-CAM visualisations. See
-[`strawberry_domain_shift.ipynb`](strawberry_domain_shift.ipynb) for the full
-results and figures.
+The headline finding: **a classical colour-based model collapses under the night
+shift, while the deep model stays robust** — confirming the central hypothesis.
+
+| Experiment | Model | Test split | Macro-F1 | AUC-ROC |
+|---|---|---|---:|---:|
+| E1 | ConvNeXt-Tiny | day | **0.957** | 0.981 |
+| E2 | SVM (RBF, HSV) | day | 0.905 | 0.967 |
+| E2 | SVM (RBF, HSV) | **night** | **0.748** ⬇ | 0.891 |
+| E3→E4 | ConvNeXt-Tiny | day → night | ΔF1 = **0.008** | — |
+
+- The **SVM baseline drops 0.905 → 0.748** (≈16 pts macro-F1) from day to night —
+  a statistically significant degradation (95% CI), as predicted for a
+  colour-sensitive model under LED-induced shift.
+- **ConvNeXt-Tiny degrades by only ΔF1 ≈ 0.008** day→night (E4) and retains 99.7%
+  of its day-time performance — i.e. the deep model is largely shift-robust where
+  the classical one is not.
+
+Full per-class metrics, ROC/PR curves, confusion matrices, training curves, and
+Grad-CAM visualisations are in [`results/`](results/) and the notebook
+[`strawberry_domain_shift.ipynb`](strawberry_domain_shift.ipynb).
+
+![Day vs night LED shift](results/figures/led_day_vs_night.png)
+![ConvNeXt training curves](results/figures/E1_training_curves.png)
 
 ## How to run
 
